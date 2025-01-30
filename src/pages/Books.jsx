@@ -21,7 +21,7 @@ export const Books = () => {
 
     const fetchBooks = async () => {
         try {
-            let url = `${baseurl}?page=${currentPage}&limit=5`;
+            let url = `https://decorous-exuberant-nightshade.glitch.me/books`;
             if (sort) {
                 url += `&sort=${sort}`;
             }
@@ -37,6 +37,7 @@ export const Books = () => {
 
             const data = await reponse.json();
             setbooks(data);
+            console.log(data);
 
             const fileredcat = [...new set(data.map(book => book.category))];
             setFilterCat(fileredcat);

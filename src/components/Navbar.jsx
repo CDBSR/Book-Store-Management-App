@@ -12,11 +12,8 @@ export const Navbar = () => {
         <nav>
             <Link to='/'>Home</Link>
             <Link to='/books'>Books</Link>
-            {/* {auth.token ? (
-                    <button onClick={logout}>Logout</button>
-            ) : (
-                <Link to='/login'>Login</Link>
-            )} */}
+            <Link to='/login'>Login</Link>
+            <button onClick={logout}>Logout</button>
         </nav>
         </>
     )

@@ -1,5 +1,6 @@
 import React, { Children, createContext, useState } from "react";
 import { useContext } from "react";
+import axios from 'axios'
 
 export const AuthContext = createContext();
 
@@ -11,27 +12,27 @@ export const AuthProvider = ({children}) => {
 
     const login = async (username, password) => {
         try{
-            const response = await fetch('https://decorous-exuberant-nightshade.glitch.me/login',{
-                method:'POST',
-                headers: {
-                    'content-type' : 'application/json'
-                },
-                body: JSON.stringify({username, password})
-            });
+            const repsonse = await axios (
+                {
+                    method : 'POST',
+                    url: `https://decorous-exuberant-nightshade.glitch.me/login`,
+                    data: {
+                        username:username, password:password
+                    }
+                }
+            );
 
-            const data = await response.json();
-
-            if(data.success) {
+            if(repsonse.data.success) {
                 setAuth({
                     isAuthenticated: true,
-                    token: data.token
+                    token: repsonse.data.token
                 });
 
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('token',repsonse.data.token);
                 return {success: true};
             }
             else {
-                return {success: false, message: data.message};
+                return {success: false, message: repsonse.data.message};
             }
         } catch(error) {
             console.log("error in logging", error);

@@ -1,6 +1,7 @@
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 export const Login = () => {
     const [username, setusername] = useState('');
@@ -9,6 +10,7 @@ export const Login = () => {
     const navigate = useNavigate();
 
     const handleLogin = async(e) => {
+        e.preventDefault();
         try {
             await login(username, password);
             navigate("/books");
